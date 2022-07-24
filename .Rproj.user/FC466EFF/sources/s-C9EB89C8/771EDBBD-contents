@@ -1,0 +1,33 @@
+df <- mydata [,c(1,2,3,4)]
+View (df)
+plot (df)
+
+model <- lm (price ~ powerPS + kilometer, data = df)
+summary (model)
+
+model <- lm(price ~ powerPS, data=df)
+summary(model)
+
+fucking_regmodel <- lm(price ~ powerPS + kilometer + yearOfRegistration, data = df)
+summary (fucking_regmodel)
+
+fucking_regmodel <- lm(price ~ powerPS + kilometer, data = df)
+summary (fucking_regmodel)
+
+fucking_regmodel <- lm(price ~ powerPS + yearOfRegistration, data = df)
+summary (fucking_regmodel)
+
+fucking_regmodel <- lm(price ~ kilometer + yearOfRegistration, data = df)
+summary (fucking_regmodel)
+
+
+
+fucking_regmodel <- lm(price ~ powerPS, data = df)
+summary (fucking_regmodel)
+
+fucking_regmodel <- lm(price ~ kilometer, data = df)
+summary (fucking_regmodel)
+
+fucking_regmodel <- lm(price ~ yearOfRegistration, data = df)
+summary (fucking_regmodel)
+

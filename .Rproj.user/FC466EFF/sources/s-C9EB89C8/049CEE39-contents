@@ -1,0 +1,11 @@
+
+library(readr)
+
+View(df)
+
+df$vert <- as.factor(df$vert)
+aov(yield ~ vert, data=df)
+summary(aov(yield ~ vert, data=df))
+
+plot(df)
+

@@ -1,0 +1,58 @@
+
+
+
+D <- df$diameter
+R <- df$roughness
+P <- df$pressure
+T <- df$temperature
+F <- df$feed
+H <- df$hardness
+TH <- df$thickness
+
+plot(df)
+
+
+fm <- lm(D~ R + P + T + F + H + TH, data = df) #All
+summary(fm)
+
+fm <- lm(D~ P + T + F + H + TH, data = df) #roughness
+summary(fm)
+
+fm <- lm(D~ R + T + F + H + TH, data = df) #pressure
+summary(fm)
+
+fm <- lm(D~ R + P + F + H + TH, data = df) #temperature
+summary(fm)
+
+fm <- lm(D~ R + P + T + H + TH, data = df) #feed
+summary(fm)
+
+fm <- lm(D~ R + P + T + F + TH, data = df) #hardness
+summary(fm)
+
+fm <- lm(D~ R + P + T + F + H, data = df) #thickness
+summary(fm)
+
+fm <- lm(D~ P + H + R, data = df) #no temperature+feed+thickness
+summary(fm)
+
+fm <- lm(D~ P + H, data = df) #same without roughness
+summary(fm)
+
+fm <- lm(D~ P, data = df) #same without roughness+hardness
+summary(fm)
+
+
+cor(df)
+cormat <- round(cor(df),2)
+cor(df)
+cormat
+
+melted_cormat <- melt(cormat)
+
+ggplot(data=melted_cormat, aes(x=Var1, y=Var2, fill=value)) + geom_tile()
+
+
+md <- lm(D ~ P + H, data=df)
+par(mfrow = c(2,2))
+plot(md)

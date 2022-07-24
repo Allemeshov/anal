@@ -1,0 +1,140 @@
+
+  #Q01 Welche Aussage zur Korrelationsanalyse ist richtig?
+      #Korrelation impliziert keine Kausalitat.
+      #Die Korrelation ist symmetrisch bezug1ich beider Variablen, d. h. X und Y sind gegenseitig austauschbar, die Korrelation bleibt in beiden Fallen konstant.
+      #Die Korrelation misst die Starke eines potenziellen Kausalzusammenhangs. 
+
+  #Q02 Ein Bestlmmtheitsmass von 1 (R^2 = 1) lasst folgenden Schluss zu (bei univariater linearer Regressions analyse)
+      #Es besteht eine exakt funktional beschreibbare Beziehung zwischen X und Y
+      #Alle Punkte (xi, Yi) liegen auf einer Geraden 
+
+  #Q03 Gegeben sind die Datenpunl<te P1 (1S0,4.S). P: (4S0.4.7), P1 (530,3.S). P4 (600.1.7) und P5 (710. 3.0). 
+  #Berechnen Sie den Bravals-Pearson-Correlationskoeffizlenten und das BestimmtheltsmaB R^2.
+
+      #X <- c(150, 450, 530, 600, 710)
+      #Y <- c(4.5, 4.7, 3.5, 1.7, 3.0)
+      #cor(X,Y)          #-0.6753268
+      #lf <- lm(X~Y)
+      #summary(lf)       #Watch R^2   0.4561
+      
+  #Q04 Wie stark ist lhrer Meinung nach die Korrelatlon in Frage 03? 
+    
+      #Look at cor(X,Y) and compare the resulting number with the theory below. THE SIGN DOEN'T MATTER!!!
+      
+          # r > 0.9 - Strong Linear Correlation
+          # 0.7 < r < 0.9 - Medium Linear Correlation
+          # 0.5 < r < 0.7 - Weak Linear Correlation
+          # 0 < r </= 0.5 - No or Doubtful Linear Correlation
+
+  #Q05 Welchen Wert sollte der Median der Residuen haben, damit die Residuen entlang der Regressionsgeraden normalverteilt sind?
+
+      # Answer is: 0 (Zero)
+
+  #Q06 Wie lautet die Nullhypothese hinter dem t-Test eines einzelnen Koeffizienten des Regressionsmodells?
+
+      # Die entsprechende unabhangige Variable Xi tragt nichts zur Erklarung der abhangigen Variable
+      # Der Koeffizient bi der entsprechenden Variable X1 ist Null, d. h. b1 = 0 
+
+  #Q07 Welche Nullhypothese steht hinter dem T-Fest des Regressionsmodells?
+
+      # Das Modell erklart nicht die Variation der abhangigen Variable 
+
+  #Q08 Um welchen Faktor andert sich der Schlitzfehler eines Regressionsmodells, wenn sich die Anzahl der Beobachtungswerte nicht andert?
+
+      # Answer is: 1/sqrrt(n) , where "n" = sample size
+
+  #Q09 Wie verhalt sich der Schlitzfehler, wenn die Anzahl der Beobachtungen n steigt (absolut wie prozentual)?
+
+      # Die Schatzungsfehler verringern sich
+
+  #Q10 Wie viele Beobachtungswerte (in Prozent) liegen lnnerhalb des Bereichs des Standardfehlers, der die Regressionsgerade umgibt?
+
+      # Answer is: 68.3%
+
+
+
+              #REGRESSION ANALYSIS
+
+
+  #Q11 Beginnen Sie Ihre Analyse zunächst mit einem Regressionsmodell (= Gesamtmodell}, das alle gegebenen Variablen enthält. 
+      #Wie hoch ist der Erklärungsbeitrag dieses Modells zur Variation der abhängigen Variable •zufriedenheit•? 
+
+        #Import dataset, name it "df" 
+        #Assign variables as below:
+
+            #S <- df$stay
+            #D <- df$diversity
+            #W <- df$waitingtime
+            #ST <- df$safety
+            #Q <- df$quality
+            #SF <- df$satisfaction
+            #E <- df$expenses
+            #A <- df$age
+
+        #Independent variable comes first, then "~", then other variables, then data=df
+
+            #fm <- lm(SF~ S + D + W + ST + Q + E + A, data = df)
+            #summary(fm)
+
+        # Look at the multiple R^2   Answer is: 0.6639  =  66,4%
+
+  #Q12 Wie viel von dem Erklärungsgehalt des Modells geht durch die Interaktion und gegenseitige Beeinflussung der Variablen im Modell verloren?
+
+        #Multiple R^2 - Adjusted R^2 Answer is: 0.6639 - 0.6473 = 0.0166  =  1.66%
+
+  #Q13 Welche Variable würden Sie zuerst aus dem Gesamtmodell entfernen, um zu versuchen, den Erklärungsanteil des Modells zu verbessern?
+
+        #Look at the p-value. The bigges one has the lowes impact and can be removed. 
+        #Answer is: D - Diversity
+
+  #Q14 Welche einzelne Variable hat den stärksten Einfluss (den größten Effekt) auf die Kundenzufriedenheit?
+
+        #Look at the p-value. The lowest one has the most impact.
+        #Answer is: W - waiting time
+
+  #Q15 (noch zu Frage 14:) Wie stark ist dieser Einfluss auf die abhängige Variable?
+
+        #According to Mock-Exam: make the same model, but without the strongest variable and compare R^2 of both original and new model.
+            #fm <- lm(SF~ S + D + ST + Q + E + A, data = df)
+            #summary(fm)
+
+              #Answer is: 0.6639 - 0.4597 = 0.2042 = 20.4%
+
+        #Accordding to previous exam:
+              
+              #Answer is: 1 - (0.6639 - 0.4597) = 0.7958 = 79.6%
+
+  #Q16  Um wie viel schätzen wir bei der Schätzung der •Kundenzufriedenheit" mit dem Gesamtmodell Im Durthschnitt falsch, d.h. wie hoch Ist 
+        #der durchsthnltthche Schätzfehler bei Jeder Schätzung mit dem Modell mit allen Einflüssen? 
+
+              #Look at the residual standard error
+              #Answer is: 10.23    SOMEHOW SOMETIMES 0.594
+
+  #Q17 Optimieren Sie nun das Regressionsmodell, um das Modell mit dem größten Erklärungsbeitrag und dem größten Goodness-of-flt-Wert zu finden. 
+      #Frage: Welche Variablen sind in diesem Modell aus dem ursprünglichen Gesamtmodell noch enthalten? 
+
+              #Look at the p-value. Take first 3 least values. 
+              # Answer is: Waiting time, Expenses, Age
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+

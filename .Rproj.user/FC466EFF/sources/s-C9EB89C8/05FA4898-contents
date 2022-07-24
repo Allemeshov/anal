@@ -1,0 +1,22 @@
+
+
+
+df$age <- as.factor(df$age)
+aov(interest ~ age, data=df)
+summary(aov(interest ~ age, data=df))
+
+plot(df)
+
+
+
+mean1 <- mean(df2$v1)
+mean2 <- mean(df2$v2)
+mean3 <- mean(df2$v3)
+M <- (mean1 + mean2 + mean3)/3
+
+SSE <- 7*(mean1-M)^2 + 7*(mean2-M)^2 + 7*(mean3-M)^2 # Sum of Squares Explained
+SSR <- sum((df2$v1 - mean1)^2) + sum((df2$v2-mean2)^2) + sum((df2$v3-mean3)^2)
+
+MSSE <- SSE/2
+MSSR <- SSR/18
+F <- MSSE/MSSR

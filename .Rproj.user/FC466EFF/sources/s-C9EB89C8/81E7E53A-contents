@@ -1,0 +1,57 @@
+
+# SLR flat_prices
+
+# install.packages("data.table")
+library(data.table)
+
+D <- fread("flat_prices.csv")
+str(D)
+View(D)
+D
+
+plot(D)
+
+# install.packages("ggplot2")
+library(ggplot2)
+
+# install.packages("scales")
+library("scales")
+
+qplot(sqm, price, data=D) +
+  scale_y_continuous(labels=format_format(scientific=FALSE, big.mark=",", decimal.mark="."))
+
+# regression model:
+m1 <- lm(price ~ sqm, data = D)
+
+print(m1)
+
+m1
+
+summary(m1)
+
+# an alternative way to create a regression line:
+qplot(sqm, price, data = D) +
+  geom_smooth(method = 'lm', se=TRUE, color = I("red")) +
+  scale_y_continuous(labels=format_format(scientific=FALSE, big.mark=",", decimal.mark="."))
+
+
+
+
+# prediction with one x-value:
+d.pred <- data.table(sqm = 31)
+print(d.pred)
+
+d.pred$price <- predict(m1, d.pred)
+print(d.pred)
+
+
+
+
+# prediction with more than one x-values
+d.pred <- data.table(sqm = c(31, 40, 91))
+print(d.pred)
+
+d.pred$price <- predict(m1, d.pred)
+print(d.pred)
+
+
